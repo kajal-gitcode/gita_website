@@ -2,6 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import data from "../data/verse.json";
 import chapters from "../data/chapter.json";
+import VersePlayer from "../components/VersePlayer";
 
 function VerseCard({ verse, chapterId, getAudioPath }) {
   return (
@@ -38,18 +39,10 @@ function VerseCard({ verse, chapterId, getAudioPath }) {
       <p className="text-gray-700 text-l sm:text-sm mb-4 line-clamp-3">
         {verse.meaning}
       </p>
+     {/* ✅ VersePlayer */}
+      <VersePlayer verseFile={getAudioPath(chapterId, verse.verse_number)} />
 
-      {/* Audio only */}
-      <div
-        className="mb-3 flex flex-col sm:flex-row sm:items-center gap-2 w-full"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <audio controls className="w-full min-w-[200px]  sm:w-auto"
-          src={getAudioPath(chapterId, verse.verse_number)}
-        />
-      </div>
-
-      {/* Read More link */}
+    
       <Link
         to={`/chapter/${chapterId}/verse/${verse.verse_number}`}
         onClick={(e) => e.stopPropagation()}
@@ -69,7 +62,7 @@ export default function ChapterPage() {
   const getAudioPath = (chapter, verse) => {
     const ch = String(chapter).padStart(2, "0");
     const vs = String(verse).padStart(2, "0");
-    return `/audio/verse_${ch}_${vs}_paused_repeated.wav`;
+    return `/verse_${ch}_${vs}_paused.wav`;
   };
 
   return (

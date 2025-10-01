@@ -4,6 +4,7 @@ import ChapterPage from "./pages/ChapterPage";
 import VersePage from "./pages/VersePage";
 import SearchResults from "./pages/SearchResults"; // ⬅️ New page import
 
+
 import Header from "./components/Header";
 
 function App() {
