@@ -3,7 +3,7 @@ import verseData from "../data/verse.json";
 import Fuse from "fuse.js";
 import { doubleMetaphone } from "double-metaphone";
 
-// 🔹 Normalize text (lowercase + remove diacritics)
+//  Normalize text (lowercase + remove diacritics)
 function normalize(str) {
   return str
     ?.toLowerCase()
@@ -11,7 +11,7 @@ function normalize(str) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-// 🔹 Highlight matches in UI (direct substring highlight only)
+//  Highlight matches in UI (direct substring highlight only)
 function highlightMatches(text, query) {
   if (!text || !query) return text;
   const lowerQuery = normalize(query);
@@ -54,19 +54,19 @@ function SearchResults() {
   const decodedQuery = decodeURIComponent(query);
   const normalizedQuery = normalize(decodedQuery);
 
-  // 🔹 Step 1: Direct substring match
+  //  Step 1: Direct substring match
   const directMatches = verseData.filter((v) =>
     normalize(v.word_meanings || "").includes(normalizedQuery)
   );
 
-  // 🔹 Step 2: Phonetic matches
+  //  Step 2: Phonetic matches
   const [q1, q2] = doubleMetaphone(normalizedQuery);
   const phoneticMatches = verseData.filter((v) => {
     const [t1, t2] = doubleMetaphone(normalize(v.word_meanings || ""));
     return q1 === t1 || q1 === t2 || q2 === t1 || q2 === t2;
   });
 
-  // 🔹 Step 3: Fuzzy matches
+  //  Step 3: Fuzzy matches
   const fuse = new Fuse(
     verseData.map((v) => ({
       ...v,
@@ -79,7 +79,7 @@ function SearchResults() {
   );
   const fuzzyMatches = fuse.search(normalizedQuery).map((r) => r.item);
 
-  // 🔹 Combine all results & remove duplicates
+  //  Combine all results & remove duplicates
   const seen = new Set();
   const results = [...directMatches, ...phoneticMatches, ...fuzzyMatches].filter(
     (v) => {

@@ -9,7 +9,7 @@ export default function HomePage() {
     <section className="relative bg-gradient-to-br from-yellow-100 via-orange-50 to-white min-h-screen px-6 py-12">
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+        <h1 className="text-4xl md:text-4xl font-bold text-gray-800 mb-6">
           Experience the Timeless Wisdom
           <br />
           of the <span className="text-orange-600">Bhagavad Gita</span>
@@ -54,11 +54,4 @@ export default function HomePage() {
           ))}
         </ul>
       </div>
-
-      {/* Decorative Background Elements */}
-      <div className="absolute top-10 left-10 w-20 h-20 bg-orange-200 rounded-full opacity-30 animate-pulse"></div>
-      <div className="absolute bottom-16 right-16 w-28 h-28 bg-yellow-300 rounded-full opacity-20 animate-bounce"></div>
-    </section>
-  );
-}
-
+     </section>)}

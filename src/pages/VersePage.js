@@ -44,7 +44,7 @@ export default function VersePage() {
   const chapterStr = String(chapterNum).padStart(2, "0");
   const verseStr = String(verseNum).padStart(2, "0");
 
-  // 🔹 Split Devanagari and Transliteration by newline
+  //  Split Devanagari and Transliteration by newline
   const devParts = verse.text.split("\n").filter(Boolean);
   const transParts = verse.transliteration.split("\n").filter(Boolean);
 
@@ -184,14 +184,12 @@ export default function VersePage() {
     >
       <path d="M15 6L9 12L15 18" />
     </svg>
-    Prev
     </button>
         <button
           onClick={goNext}
           disabled={chapterNum === 18 && verseNum === totalVerses}
           className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
        >
-    Next
     {/* Right Arrow SVG */}
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,48 +1,34 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VERSE_COUNT = {
-  1: 47,
-  2: 72,
-  3: 43,
-  4: 42,
-  5: 29,
-  6: 47,
-  7: 30,
-  8: 28,
-  9: 34,
-  10: 42,
-  11: 55,
-  12: 20,
-  13: 35,
-  14: 27,
-  15: 20,
-  16: 24,
-  17: 28,
-  18: 78,
+  1: 47, 2: 72, 3: 43
+  , 4: 42, 5: 29, 6: 47, 7: 30, 8: 28, 9: 34, 10: 42,
+  11: 55, 12: 20, 13: 35, 14: 27, 15: 20, 16: 24, 17: 28, 18: 78,
 };
 
 export default function ContentMenu({ onSelect }) {
-  const [selectedChapter, setSelectedChapter] = useState(null);
-  const [selectedVerse, setSelectedVerse] = useState(null);
+  const [selectedChapter, setSelectedChapter] = useState("1");
+  const [selectedVerse, setSelectedVerse] = useState(1);
   const navigate = useNavigate();
 
-  // ✅ On first load, highlight Chapter 1 & Verse 1, but don't navigate
-  useEffect(() => {
-    if (!selectedChapter) {
-      setSelectedChapter("1");
-      setSelectedVerse(1);
-    }
-  }, [selectedChapter]);
-
+  //  Corrected: Only navigate after drawer closes
   const handleVerseClick = (chapter, verse) => {
     setSelectedVerse(verse);
-    navigate(`/chapter/${chapter}/verse/${verse}`);
-    if (onSelect) onSelect();
+
+    if (onSelect) {
+      // Close drawer/menu first
+      onSelect(chapter, verse);
+      
+    } else {
+      //  For desktop, navigate immediately
+      navigate(`/chapter/${chapter}/verse/${verse}`);
+    }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
       {/* Chapters */}
       <div className="bg-white p-3 rounded-xl shadow-sm border">
         <h2 className="font-bold text-gray-700 mb-2">Chapters</h2>
@@ -52,9 +38,9 @@ export default function ContentMenu({ onSelect }) {
               key={chapter}
               onClick={() => {
                 setSelectedChapter(chapter);
-                setSelectedVerse(1); // default to verse 1 whenever chapter changes
+                setSelectedVerse(1);
               }}
-              className={`cursor-pointer px-1 py-1 rounded-md transition ${
+              className={`cursor-pointer px-2 py-1 rounded-md transition ${
                 selectedChapter === chapter
                   ? "bg-orange-200 text-orange-800 font-semibold"
                   : "hover:bg-orange-50"
@@ -70,7 +56,7 @@ export default function ContentMenu({ onSelect }) {
       <div className="bg-orange-50 p-3 rounded-xl shadow-sm border">
         <h2 className="font-bold text-gray-700 mb-2">Verses</h2>
         {selectedChapter ? (
-          <div className="grid grid-cols-5 sm:grid-cols-8 gap-2  pr-2">
+          <div className="grid grid-cols-5 sm:grid-cols-8 gap-2 pr-2">
             {Array.from(
               { length: VERSE_COUNT[selectedChapter] },
               (_, i) => i + 1
