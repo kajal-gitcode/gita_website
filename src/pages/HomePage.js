@@ -7,7 +7,6 @@ const chapters = Array.from({ length: 18 }, (_, i) => i + 1);
 export default function HomePage() {
   return (
     <section className="relative bg-gradient-to-br from-yellow-100 via-orange-50 to-white min-h-screen px-6 py-12">
-      {/* Hero Section */}
       <div className="max-w-4xl mx-auto text-center mb-12">
         <h1 className="text-4xl md:text-4xl font-bold text-gray-800 mb-6">
           Experience the Timeless Wisdom

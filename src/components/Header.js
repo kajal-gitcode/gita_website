@@ -161,7 +161,7 @@ export default function Header() {
           <SearchBar />
          </div>
       {/* content button */}   
-          <div className="relative"></div>
+          <div className="relative inline-block"></div>
          <button
           onClick={() => setShowDesktopMenu((prev) => !prev)}
                 className="flex flex-col items-center px-3 py-2 rounded-lg text-gray-800 hover:bg-orange-50 hover:text-orange-600 transition" > 
@@ -169,7 +169,7 @@ export default function Header() {
             <span>Content</span> 
          </button>
           {showDesktopMenu && ( 
-            <div className="absolute right-0 mt-2 bg-white shadow-lg rounded p-4 z-50 w-[600px] max-h-[80vh] overflow-y-auto" > 
+            <div className="fixed top-[80px] right-8 bg-white shadow-lg rounded p-4 z-50 w-[600px] max-h-[80vh] overflow-y-auto transition-all">
             <ContentMenu onSelect={handleVerseSelect} />
              </div> )}
               </div>             

@@ -18,11 +18,9 @@ export default function ContentMenu({ onSelect }) {
     setSelectedVerse(verse);
 
     if (onSelect) {
-      // Close drawer/menu first
       onSelect(chapter, verse);
-      
-    } else {
-      //  For desktop, navigate immediately
+    } 
+    else {  
       navigate(`/chapter/${chapter}/verse/${verse}`);
     }
   };

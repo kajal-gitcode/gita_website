@@ -94,21 +94,115 @@ export default function ChapterPage() {
   return (
     <div className="p-4 sm:p-6 max-w-6xl mx-auto">
 
-      {/* ====== HEADER ====== */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
-        <div className="flex items-center justify-center">
-          <div className="bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg">
-            {chapterId}
-          </div>
-          <span className="hidden sm:block text-sm font-medium text-gray-600 mt-1 opacity-80 ml-2">
-            Chapter
-          </span>
-        </div>
 
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 border-b-2 border-orange-300 pb-1 leading-none text-center sm:text-left">
-          {chapter?.name}
-        </h1>
-      </div>
+
+{/* ====== HEADER of chapter page ====== */}
+<div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+  {/* --- Left: Chapter Number --- */}
+  <div className="flex items-center justify-center">
+    <div className="bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg">
+      {chapterId}
+    </div>
+    <span className="hidden sm:block text-sm font-medium text-gray-600 mt-1 opacity-80 ml-2">
+      Chapter
+    </span>
+  </div>
+
+  {/* --- Center: Chapter Name --- */}
+  <div className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-4">
+    <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 border-b-2 border-orange-300 pb-1 leading-none text-center sm:text-left">
+      {chapter?.name}
+    </h1>
+
+    {/* --- Desktop Buttons (beside name) --- */}
+    <div className="hidden sm:flex items-center gap-3">
+      {/* Previous Chapter */}
+      <button
+        disabled={parseInt(chapterId) === 1}
+        onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
+        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
+      >
+        {/* Left Arrow SVG */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M15 6L9 12L15 18" />
+        </svg>
+      </button>
+
+      {/* Next Chapter */}
+      <button
+        disabled={parseInt(chapterId) === chapters.length}
+        onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
+        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
+      >
+        {/* Right Arrow SVG */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 6L15 12L9 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {/* ---  Buttons (below name) --- */}
+  <div className="flex sm:hidden items-center justify-center gap-4 mt-1">
+    <button
+      disabled={parseInt(chapterId) === 1}
+      onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
+      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
+    >
+      {/* Left Arrow SVG */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M15 6L9 12L15 18" />
+      </svg>
+    </button>
+
+    <button
+      disabled={parseInt(chapterId) === chapters.length}
+      onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
+      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
+    >
+      {/* Right Arrow SVG */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M9 6L15 12L9 18" />
+      </svg>
+    </button>
+    </div>
+  </div>
 
       {/* ====== SUMMARY ====== */}
       <p className="text-gray-700 text-sm sm:text-base mb-8 text-center max-w-3xl mx-auto leading-relaxed">
@@ -158,39 +252,39 @@ export default function ChapterPage() {
 
     
       {/* ====== TOGGLE MODE SECTION ======*/}
-<div className="flex items-center justify-center gap-3 mb-4">
-  <span className="text-gray-700 font-medium">Mode of Play:</span>
+     <div className="flex items-center justify-center gap-3 mb-4">
+      <span className="text-gray-700 font-medium">Mode of Play:</span>
 
-  {/* === Play One Button === */}
-  <button
-    onClick={() => setPlayMode("one")}
-    className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
-  playMode === "one"
-    ? "border-orange-300 bg-orange-400 text-white hover:border-orange-300 hover:text-white shadow-md shadow-orange-200 scale-105"
-    : "border-orange-300 text-orange-400 scale-105 "
-}`}
+     {/* === Play One Button === */}
+    <button
+      onClick={() => setPlayMode("one")}
+      className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
+     playMode === "one"
+        ? "border-orange-300 bg-orange-400 text-white hover:border-orange-300 hover:text-white shadow-md shadow-orange-200 scale-105"
+        : "border-orange-300 text-orange-400 scale-105 "
+      }`}
 
-  >
-    Play One
-  </button>
+     >
+      Play One
+    </button>
 
-  {/* === Play All Button === */}
-  <button
-    onClick={() => {
+    {/* === Play All Button === */}
+    <button
+      onClick={() => {
       setQueue(verses);        // Initialize queue with all verses
       setCurrentVerseIndex(0); // Start from first verse
       setPlayMode("all");
     }}
     className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
-  playMode === "all"
+     playMode === "all"
     ? "border-orange-300 bg-orange-400 text-white hover:border-orange-300 hover:text-white shadow-md shadow-orange-200 scale-105"
     : "border-orange-300 text-orange-400 scale-105 "
-}`}
+     }`}
 
   >
-    Play All
-  </button>
-</div>
+     Play All
+    </button>
+    </div>
 
       {/* ====== NOW PLAYING ====== */}
       {playMode === "all" && (
@@ -234,6 +328,25 @@ export default function ChapterPage() {
       autoPlay={true}
     />
   </div>
+)}
+
+{/* ====== GO TO TOP BUTTON (MOBILE ONLY) ====== */}
+{playMode === "one" && (
+<button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className=" fixed bottom-5 right-5 bg-gray-400 text-white p-3 rounded-full shadow-lg hover:bg-gray-600 transition-all"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
 )}
 </div>
   )}
