@@ -11,7 +11,22 @@ export default function VersePlayer({ verseFile, onVerseEnd, autoPlay,playMode }
   const [repeatLeft, setRepeatLeft] = useState(0);
   const [isEnded, setIsEnded] = useState(false);
 
- 
+ useEffect(() => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  const handlePlay = () => {
+    document.querySelectorAll("audio").forEach((a) => {
+      if (a !== audio) a.pause(); // pause all others
+    });
+  };
+
+  audio.addEventListener("play", handlePlay);
+  return () => {
+    audio.removeEventListener("play", handlePlay);
+  };
+}, []);
+
   useEffect(() => {
     const pauses = PAUSE_TIMINGS[verseFile] || [];
     const segs = pauses.map((p) => ({ start: p.start, end: p.end }));
@@ -87,14 +102,14 @@ export default function VersePlayer({ verseFile, onVerseEnd, autoPlay,playMode }
   };
 
   return (
-    <div className="my-4">
+    <div className="">
       <audio
         ref={audioRef}
         src={`/audio/${verseFile}`}
         controls
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleEnded}
-        className="w-full rounded-lg"
+        className="w-medium rounded-lg"
       ></audio>
 
       <div className="mt-2 flex items-center gap-2 text-sm text-gray-700">

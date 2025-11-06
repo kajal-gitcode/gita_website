@@ -5,15 +5,7 @@ import { Home, BookOpen } from "lucide-react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Box,
-} from "@mui/material";
+import { Drawer,IconButton,List,ListItem,ListItemText,ListItemIcon,Box,} from "@mui/material";
 import ContentMenu from "./ContentMenu";
 import SearchBar from "./SearchBar";
 
