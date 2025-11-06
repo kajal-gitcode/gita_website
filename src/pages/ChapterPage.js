@@ -4,6 +4,10 @@ import data from "../data/verse.json";
 import chapters from "../data/chapter.json";
 import VersePlayer from "../components/VersePlayer";
 import { useState } from "react";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
+
+
 
 // --- Reusable Verse Card Component ---
 function VerseCard({ verse, chapterId, getAudioPath, playMode, onNext, autoPlay }) {
@@ -21,23 +25,23 @@ function VerseCard({ verse, chapterId, getAudioPath, playMode, onNext, autoPlay 
       `}
       onClick={handleCardClick}
     >
-      <h3 className="text-base sm:text-lg text-orange-500 font-bold mb-2">
+      <h3 className="text-base sm:text-lg text-orange-500 font-bold  mb-2">
         Verse {verse.verse_number}
       </h3>
 
-      <h2 className="text-base sm:text-lg mb-2 text-gray-900">
+      <h2 className="text-base sm:text-lg mb-1 text-gray-900">
         {verse.sanskrit_name}
       </h2>
 
-      <p className="text-gray-900 font-serif text-l sm:text-base mb-2">
+      <p className="text-gray-900 font-serif text-l sm:text-base mb-1">
         {verse.text}
       </p>
 
-      <p className="text-gray-800 italic text-l sm:text-sm mb-2">
+      <p className="text-gray-800 italic text-l sm:text-sm mb-1">
         {verse.transliteration}
       </p>
 
-      <p className="text-gray-700 text-l sm:text-sm mb-4 line-clamp-3">
+      <p className="text-gray-700 text-l sm:text-sm mb-1 line-clamp-3">
         {verse.meaning}
       </p>
 
@@ -60,7 +64,6 @@ export default function ChapterPage() {
   const verses = data.filter((v) => v.chapter_number === parseInt(chapterId));
   const chapter = chapters.find((c) => c.id === parseInt(chapterId));
   const [queue, setQueue] = useState([]);  // Queue for Play All
-  const [searchVerse, setSearchVerse] = useState("");
   const [playMode, setPlayMode] = useState("one");
   const [currentVerseIndex, setCurrentVerseIndex] = useState(0);
 
@@ -79,50 +82,37 @@ export default function ChapterPage() {
     return;
   }
 
-  const [, ...restQueue] = queue;    // remove first verse
+  const [, ...restQueue] = queue;   
   setQueue(restQueue);               // update queue
   setCurrentVerseIndex(verses.indexOf(restQueue[0])); // update index
 };
 
-
-  //  Go to verse by input
-  const goToVerse = (v) => {
-    navigate(`/chapter/${chapterId}/verse/${v}`);
-    setSearchVerse("");
-  };
-
-  return (
-    <div className="p-4 sm:p-6 max-w-6xl mx-auto">
-
-
-
-{/* ====== HEADER of chapter page ====== */}
-<div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
-  {/* --- Left: Chapter Number --- */}
-  <div className="flex items-center justify-center">
-    <div className="bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg">
+   return (
+ <div className="p-4 sm:p-6 max-w-6xl mx-auto">
+    {/* ====== HEADER of chapter page ====== */}
+    <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+    {/* --- Left: Chapter Number --- */}
+     <div className="flex items-center justify-center">
+       <div className="bg-orange-400 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg">
       {chapterId}
-    </div>
-    <span className="hidden sm:block text-sm font-medium text-gray-600 mt-1 opacity-80 ml-2">
+     </div>
+     <span className="hidden sm:block text-sm font-medium text-gray-600 mt-1 opacity-80 ml-2">
       Chapter
     </span>
-  </div>
+     </div>
 
-  {/* --- Center: Chapter Name --- */}
-  <div className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-4">
-    <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 border-b-2 border-orange-300 pb-1 leading-none text-center sm:text-left">
+    {/* --- Center: Chapter Name --- */}
+    <div className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-4">
+      <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 border-b-2 border-orange-300 pb-1 leading-none text-center sm:text-left">
       {chapter?.name}
-    </h1>
-
-    {/* --- Desktop Buttons (beside name) --- */}
+       </h1>
+  
+    {/* --- Desktop Nav Buttons  --- */}
     <div className="hidden sm:flex items-center gap-3">
-      {/* Previous Chapter */}
       <button
         disabled={parseInt(chapterId) === 1}
         onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
-        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
-      >
-        {/* Left Arrow SVG */}
+        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -131,20 +121,16 @@ export default function ChapterPage() {
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+          strokeLinejoin="round">
           <path d="M15 6L9 12L15 18" />
         </svg>
       </button>
 
-      {/* Next Chapter */}
       <button
         disabled={parseInt(chapterId) === chapters.length}
         onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
-        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
-      >
-        {/* Right Arrow SVG */}
-        <svg
+        className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
+         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
           viewBox="0 0 24 24"
@@ -152,22 +138,20 @@ export default function ChapterPage() {
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+          strokeLinejoin="round">
           <path d="M9 6L15 12L9 18" />
         </svg>
       </button>
     </div>
   </div>
 
-  {/* ---  Buttons (below name) --- */}
-  <div className="flex sm:hidden items-center justify-center gap-4 mt-1">
+{/* --- Mobile View Nav + Toggle --- */}
+ <div className="flex sm:hidden items-center justify-between w-full px-2 mt-1">
+  <div className="flex items-center gap-3">
     <button
       disabled={parseInt(chapterId) === 1}
       onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
-      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
-    >
-      {/* Left Arrow SVG */}
+      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5"
@@ -176,18 +160,14 @@ export default function ChapterPage() {
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+        strokeLinejoin="round">
         <path d="M15 6L9 12L15 18" />
       </svg>
-    </button>
-
+     </button>
     <button
       disabled={parseInt(chapterId) === chapters.length}
       onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
-      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition"
-    >
-      {/* Right Arrow SVG */}
+      className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5"
@@ -196,98 +176,106 @@ export default function ChapterPage() {
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+        strokeLinejoin="round">
         <path d="M9 6L15 12L9 18" />
       </svg>
-    </button>
+     </button>
     </div>
-  </div>
-
-      {/* ====== SUMMARY ====== */}
-      <p className="text-gray-700 text-sm sm:text-base mb-8 text-center max-w-3xl mx-auto leading-relaxed">
-        {chapter?.summary}
-      </p>
-
-      {/* ====== GO TO VERSE BAR ====== */}
-      <div className="mb-6 flex justify-center gap-3">
-        <div className="flex items-center border border-orange-100 rounded-xl bg-white shadow-sm overflow-hidden">
-          <input
-            type="number"
-            placeholder="Go to verse"
-            value={searchVerse}
-            onChange={(e) => setSearchVerse(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && searchVerse) {
-                const verseNum = parseInt(searchVerse);
-                if (verseNum >= 1 && verseNum <= verses.length) goToVerse(verseNum);
-              }
-            }}
-            className="w-40 py-2.5 px-3 text-base outline-none border-none focus:ring-0 placeholder:text-gray-400 text-gray-800"
-            min={1}
-            max={verses.length}
-          />
-          <button
-            onClick={() => {
-              if (searchVerse) {
-                const verseNum = parseInt(searchVerse);
-                if (verseNum >= 1 && verseNum <= verses.length) goToVerse(verseNum);
-              }
-            }}
-            className="bg-orange-400 text-white px-5 py-3 text-sm font-semibold hover:bg-orange-500 transition-all"
-          >
-            Go
-          </button>
-        </div>
-
-        <div className="flex items-center gap-1 bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 shadow-inner">
-          <span className="text-gray-700 font-semibold text-sm sm:text-base">
-            {verses.length}
-          </span>
-          <span className="text-gray-700 text-m sm:text-sm font-medium">
-            Verses
-          </span>
-        </div>
-      </div>
-
-    
-      {/* ====== TOGGLE MODE SECTION ======*/}
-     <div className="flex items-center justify-center gap-3 mb-4">
-      <span className="text-gray-700 font-medium">Mode of Play:</span>
-
-     {/* === Play One Button === */}
+    {/*toggle */}
+  <div className="relative flex bg-orange-100 rounded-full w-28 h-10 items-center justify-between px-2 transition-all duration-300">
+   <div
+      className={`absolute top-1 left-1 h-[calc(100%-8px)] bottom-1 w-[50%] bg-orange-400 rounded-full transition-transform duration-300 ${
+        playMode === "one" ? "translate-x-0" : "translate-x-full"
+      }`}>
+   </div>
     <button
       onClick={() => setPlayMode("one")}
-      className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
-     playMode === "one"
-        ? "border-orange-300 bg-orange-400 text-white hover:border-orange-300 hover:text-white shadow-md shadow-orange-200 scale-105"
-        : "border-orange-300 text-orange-400 scale-105 "
-      }`}
-
-     >
-      Play One
+      className="relative z-10 w-1/2 flex flex-col justify-center items-center">
+      <PlayArrowIcon
+        fontSize="small"
+        className={`transition-colors duration-300 ${
+          playMode === "one" ? "text-white" : "text-orange-600"
+        }`}/>
+      <span
+        className={`text-[9px] font-medium transition-colors duration-300 ${
+          playMode === "one" ? "text-white" : "text-orange-600"
+        }`} >
+        Manual
+      </span>
     </button>
-
-    {/* === Play All Button === */}
     <button
       onClick={() => {
-      setQueue(verses);        // Initialize queue with all verses
-      setCurrentVerseIndex(0); // Start from first verse
-      setPlayMode("all");
-    }}
-    className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
-     playMode === "all"
-    ? "border-orange-300 bg-orange-400 text-white hover:border-orange-300 hover:text-white shadow-md shadow-orange-200 scale-105"
-    : "border-orange-300 text-orange-400 scale-105 "
-     }`}
-
-  >
-     Play All
+        setQueue(verses);
+        setCurrentVerseIndex(0);
+        setPlayMode("all");}}
+      className="relative z-10 w-1/2 flex flex-col justify-center items-center">
+      <AllInclusiveIcon
+        fontSize="small"
+        className={`transition-colors duration-300 ${
+          playMode === "all" ? "text-white" : "text-orange-600"
+        }`}/>
+      <span
+        className={`text-[9px] font-medium transition-colors duration-300 ${
+          playMode === "all" ? "text-white" : "text-orange-600"
+        }`}>
+        Auto
+      </span>
     </button>
-    </div>
+  </div>
+</div>
+</div>
 
-      {/* ====== NOW PLAYING ====== */}
-      {playMode === "all" && (
+{/* ====== SUMMARY ====== */}
+ <p className="text-gray-700 text-sm sm:text-base mb-2 text-center max-w-3xl mx-auto leading-relaxed">
+    {chapter?.summary}
+  </p>
+{/*toggle switch for desktop */}
+{/* <div className=" justify-between  px-2 py-2 items-center mt-2">
+<div className="hidden sm:flex relative  flex bg-orange-100 rounded-full w-36 h-14 items-center justify-between px-2 transition-all duration-300"> */}
+<div className="hidden sm:flex justify-end mb-2 px-4">
+  <div className="relative flex bg-orange-100 rounded-full w-36 h-14 items-center justify-between px-2 transition-all duration-300 shadow-md">
+   <div
+    className={`absolute top-1 left-1 h-[calc(100%-8px)] bottom-1 w-[50%] bg-orange-400 rounded-full transition-transform duration-300 ${
+      playMode === "one" ? "translate-x-0" : "translate-x-full"}`}>
+  </div>
+  <button
+    onClick={() => setPlayMode("one")}
+    className="relative z-10 w-1/2 flex justify-center items-center">
+    <PlayArrowIcon
+      fontSize="medium"
+      className={`transition-colors duration-300 ${
+        playMode === "one" ? "text-white" : "text-orange-600"
+      }`}/>
+      <span
+      className={`text-[11px] font-medium transition-colors duration-300 ${
+        playMode === "one" ? "text-white" : "text-orange-600"
+      }`}>
+      Manual
+    </span>
+  </button>
+  <button
+    onClick={() => {
+      setQueue(verses);
+      setCurrentVerseIndex(0);
+      setPlayMode("all");}}
+    className="relative z-10 w-1/2 flex justify-center items-center">
+    <AllInclusiveIcon
+      fontSize="medium"
+      className={`transition-colors duration-300 ${
+        playMode === "all" ? "text-white" : "text-orange-600"
+      }`}/>
+     <span
+      className={`text-[11px] font-medium transition-colors duration-300 ${
+        playMode === "all" ? "text-white" : "text-orange-600"
+      }`}>
+      Auto
+    </span>
+  </button>
+ </div> 
+</div>
+  
+   {/* ====== NOW PLAYING ====== */}
+   {playMode === "all" && (
           <div className="mb-6 text-center bg-orange-50 border border-orange-200 rounded-xl p-3 shadow-inner max-w-xl mx-auto px-4 sm:px-6 flex flex-col items-center">
           <span className="text-gray-800 font-medium ">
             ▶️ Now Playing:
@@ -298,25 +286,22 @@ export default function ChapterPage() {
         </div>
       )}
 
-      {/* ====== VERSES DISPLAY ====== */}
-     
-  {/* --- Manual Mode ---*/}
-
-   {playMode === "one" ? (
-  <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2">
+ {/* ====== VERSES DISPLAY ====== */}  
+  {/*--- Manual Mode ---*/}
+    {playMode === "one" ? (
+   <div className="grid gap-2 sm:gap-2 grid-cols-1 sm:grid-cols-1 lg:grid-cols-1">
     {verses.map((v) => (
       <VerseCard
-        key={v.id}
+        key={v.id} 
         verse={v}
         chapterId={chapterId}
         getAudioPath={getAudioPath}
         playMode={playMode}
-        autoPlay={false}
-      />
+        autoPlay={false}/>
     ))}
   </div>
 ) : (
-  //--- Play All Mode: Centered Single Verse ---
+  //--- Auto mode ---
   <div className="flex justify-center mb-6">
     <VerseCard
       key={currentVerseIndex}
