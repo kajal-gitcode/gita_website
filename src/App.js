@@ -9,7 +9,7 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/gitasupersite">
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />

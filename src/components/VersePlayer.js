@@ -105,7 +105,7 @@ export default function VersePlayer({ verseFile, onVerseEnd, autoPlay,playMode }
     <div className="">
       <audio
         ref={audioRef}
-        src={`/audio/${verseFile}`}
+        src={`${process.env.PUBLIC_URL}/audio/${verseFile}`}
         controls
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleEnded}

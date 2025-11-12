@@ -50,7 +50,7 @@ export default function Header() {
           onClick={handleLogoClick}
         >
           <img
-            src="/favicon.ico"
+            src="/gitasupersite/favicon.ico"
             alt="Bhagavad Gita Logo"
             className="w-8 h-8 "
           />
@@ -142,7 +142,7 @@ export default function Header() {
      <div className="hidden md:flex items-center justify-between  w-full">
     {/* Left: Logo + Title */}
       <div onClick={handleLogoClick} className="flex items-center cursor-pointer hover:opacity-80 transition" >
-       <img src="/favicon.ico" alt="Bhagavad Gita Logo"        className="w-10h-10mr-2" />
+       <img src="/gitasupersite/favicon.ico" alt="Bhagavad Gita Logo"        className="w-10h-10mr-2" />
        <h1 className="text-2xl font-semibold text-gray-800">Bhagavad Gita</h1>
        </div> 
       

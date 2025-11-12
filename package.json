@@ -1,6 +1,7 @@
 {
   "name": "gita-reader",
   "version": "0.1.0",
+  "homepage": "/gitasupersite/",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
