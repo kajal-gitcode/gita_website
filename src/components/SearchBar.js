@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    navigate(`/search/${encodeURIComponent(query)}`);
+    navigate(`search/${encodeURIComponent(query)}`);
     setQuery("");
   };
 
@@ -43,3 +43,9 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+
+
+
+
+

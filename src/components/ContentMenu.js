@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { go } from "../utils/nav";
+
 
 const VERSE_COUNT = {
   1: 47, 2: 72, 3: 43
@@ -20,9 +22,10 @@ export default function ContentMenu({ onSelect }) {
     if (onSelect) {
       onSelect(chapter, verse);
     } 
-    else {  
-      navigate(`/chapter/${chapter}/verse/${verse}`);
+    else {
+      navigate(go(`/chapter/${chapter}/verse/${verse}`));
     }
+
   };
 
   return (
@@ -79,3 +82,9 @@ export default function ContentMenu({ onSelect }) {
     </div>
   );
 }
+
+
+
+
+
+

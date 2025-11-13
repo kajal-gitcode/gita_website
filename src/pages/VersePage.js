@@ -1,7 +1,8 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import data from "../data/verse.json";
 import VersePlayer from "../components/VersePlayer";
-
+import { go } from "../utils/nav";
 export default function VersePage() {
   const { chapterId, verseId } = useParams();
   const navigate = useNavigate();
@@ -22,21 +23,21 @@ export default function VersePage() {
   // Navigation
   const goPrevious = () => {
     if (verseNum > 1) {
-      navigate(`/chapter/${chapterNum}/verse/${verseNum - 1}`);
+      navigate(go(`/chapter/${chapterNum}/verse/${verseNum - 1}`));
     } else if (chapterNum > 1) {
       const prevChapter = chapterNum - 1;
       const lastVersePrevChapter = data.filter(
         (v) => v.chapter_number === prevChapter
       ).length;
-      navigate(`/chapter/${prevChapter}/verse/${lastVersePrevChapter}`);
+      navigate(go(`/chapter/${prevChapter}/verse/${lastVersePrevChapter}`));
     }
   };
 
   const goNext = () => {
     if (verseNum < totalVerses) {
-      navigate(`/chapter/${chapterNum}/verse/${verseNum + 1}`);
+      navigate(go(`/chapter/${chapterNum}/verse/${verseNum + 1}`));
     } else if (chapterNum < 18) {
-      navigate(`/chapter/${chapterNum + 1}/verse/1`);
+      navigate(go(`/chapter/${chapterNum + 1}/verse/1`));
     }
   };
 
@@ -208,3 +209,9 @@ export default function VersePage() {
     </div>
   );
 }
+
+
+
+
+
+

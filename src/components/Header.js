@@ -1,3 +1,5 @@
+import { go } from "../utils/nav";
+
 
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +31,7 @@ export default function Header() {
 
   //  Handle verse click
   const handleVerseSelect = (chapterId, verseId) => {
-    navigate(`/chapter/${chapterId}/verse/${verseId}`);
+    navigate(go(`/chapter/${chapterId}/verse/${verseId}`));
     setDrawerOpen(false);
     setActiveMenu("main");
     setShowDesktopMenu(false);
@@ -37,7 +39,8 @@ export default function Header() {
 
   //  Navigate to home when clicking logo/title
   const handleLogoClick = () => {
-    navigate("/");
+    navigate(go(`/`));
+
   };
 
   return (
@@ -50,7 +53,7 @@ export default function Header() {
           onClick={handleLogoClick}
         >
           <img
-            src="/gitasupersite/favicon.ico"
+            src="gitasupersite/favicon.ico"
             alt="Bhagavad Gita Logo"
             className="w-8 h-8 "
           />
@@ -110,7 +113,7 @@ export default function Header() {
                 <ListItem
                   button
                   component={Link}
-                  to="/"
+                  to={`${process.env.PUBLIC_URL}/`}
                   onClick={() => setDrawerOpen(false)}
                 >
                   <ListItemIcon>
@@ -142,7 +145,7 @@ export default function Header() {
      <div className="hidden md:flex items-center justify-between  w-full">
     {/* Left: Logo + Title */}
       <div onClick={handleLogoClick} className="flex items-center cursor-pointer hover:opacity-80 transition" >
-       <img src="/gitasupersite/favicon.ico" alt="Bhagavad Gita Logo"        className="w-10h-10mr-2" />
+       <img src="gitasupersite/favicon.ico" alt="Bhagavad Gita Logo"        className="w-10h-10mr-2" />
        <h1 className="text-2xl font-semibold text-gray-800">Bhagavad Gita</h1>
        </div> 
       
@@ -169,3 +172,7 @@ export default function Header() {
          </header>
   );
 }
+
+
+
+

@@ -128,7 +128,7 @@ function SearchResults() {
 
               {/* Link to verse page */}
               <Link
-                to={`/chapter/${v.chapter_number}/verse/${v.verse_number}`}
+                to={`chapter/${v.chapter_number}/verse/${v.verse_number}`}
                 className="text-blue-500 hover:underline mt-2 inline-block"
               >
                 View Verse →
@@ -142,3 +142,9 @@ function SearchResults() {
 }
 
 export default SearchResults;
+
+
+
+
+
+

@@ -27,7 +27,7 @@ export default function HomePage() {
             Explore Chapters
           </a>
           <Link
-            to={`${process.env.PUBLIC_URL}chapter/1`}
+            to="/chapter/1"
             className="px-6 py-3 bg-white border border-orange-600 text-orange-600 rounded-2xl shadow hover:bg-orange-50 transition"
           >
             Read a Verse
@@ -44,7 +44,7 @@ export default function HomePage() {
           {chapters.map((num) => (
             <li key={num}>
               <Link
-                to={`chapter/${num}`}
+                to={`/chapter/${num}`}
                 className="block bg-blue-100 hover:bg-blue-300 text-center p-4 rounded-xl shadow-md transition"
               >
                 Chapter {num}
@@ -54,9 +54,3 @@ export default function HomePage() {
         </ul>
       </div>
      </section>)}
-
-
-
-
-
-

@@ -130,3 +130,9 @@ export default function VersePlayer({ verseFile, onVerseEnd, autoPlay,playMode }
     </div>
   );
 }
+
+
+
+
+
+

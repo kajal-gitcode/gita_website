@@ -1,4 +1,4 @@
-
+import { go } from "../utils/nav";
 import { useParams, useNavigate } from "react-router-dom";
 import data from "../data/verse.json";
 import chapters from "../data/chapter.json";
@@ -9,11 +9,13 @@ import AllInclusiveIcon from "@mui/icons-material/AllInclusive";
 
 
 
+
 // --- Reusable Verse Card Component ---
 function VerseCard({ verse, chapterId, getAudioPath, playMode, onNext, autoPlay }) {
+  const navigate = useNavigate(); 
   const handleCardClick = () => {
     if (playMode === "one") {
-      window.location.href = `/chapter/${chapterId}/verse/${verse.verse_number}`;
+      navigate(go(`/chapter/${chapterId}/verse/${verse.verse_number}`));
     }
   };
 
@@ -111,7 +113,7 @@ export default function ChapterPage() {
     <div className="hidden sm:flex items-center gap-3">
       <button
         disabled={parseInt(chapterId) === 1}
-        onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
+        onClick={() => navigate(go(`/chapter/${parseInt(chapterId) - 1}`))}
         className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +130,7 @@ export default function ChapterPage() {
 
       <button
         disabled={parseInt(chapterId) === chapters.length}
-        onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
+        onClick={() => navigate(go(`/chapter/${parseInt(chapterId) + 1}`))}
         className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
          <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +152,7 @@ export default function ChapterPage() {
   <div className="flex items-center gap-3">
     <button
       disabled={parseInt(chapterId) === 1}
-      onClick={() => navigate(`/chapter/${parseInt(chapterId) - 1}`)}
+      onClick={() => navigate(go(`/chapter/${parseInt(chapterId) - 1}`))}
       className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +168,7 @@ export default function ChapterPage() {
      </button>
     <button
       disabled={parseInt(chapterId) === chapters.length}
-      onClick={() => navigate(`/chapter/${parseInt(chapterId) + 1}`)}
+      onClick={() => navigate(go(`/chapter/${parseInt(chapterId) + 1}`))}
       className="rounded-full p-3 bg-orange-100 text-orange-700 hover:bg-orange-200 disabled:opacity-40 transition">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -335,3 +337,9 @@ export default function ChapterPage() {
 )}
 </div>
   )}
+
+
+
+
+
+

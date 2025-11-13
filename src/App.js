@@ -9,16 +9,19 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <Router basename="/gitasupersite">
+    <Router basename="gitasupersite">
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/chapter/:chapterId" element={<ChapterPage />} />
-        <Route path="/chapter/:chapterId/verse/:verseId" element={<VersePage />} />
-        <Route path="/search/:query" element={<SearchResults />} />
+        <Route path="" element={<HomePage />} />
+        <Route path="chapter/:chapterId" element={<ChapterPage />} />
+        <Route path="chapter/:chapterId/verse/:verseId" element={<VersePage />} />
+        <Route path="search/:query" element={<SearchResults />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
+
